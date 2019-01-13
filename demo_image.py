@@ -228,9 +228,10 @@ def process (input_image, params, model_params):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image', type=str, required=True, help='input image')
-    parser.add_argument('--output', type=str, default='result.png', help='output image')
+    parser.add_argument('--image',type=str, default='sample_images/2601547353122_.pic.jpg',  help='input image')
+    parser.add_argument('--output',type=str, default='sample_images/2601547353122_result.jpg', help='output image')
     parser.add_argument('--model', type=str, default='model/keras/model.h5', help='path to the weights file')
+
 
     args = parser.parse_args()
     input_image = args.image
@@ -242,9 +243,12 @@ if __name__ == '__main__':
 
     # load model
 
+    np_branch1 = 38
+    np_branch2 = 19
+
     # authors of original model don't use
     # vgg normalization (subtracting mean) on input images
-    model = get_testing_model()
+    model = get_testing_model(np_branch1,np_branch2)
     model.load_weights(keras_weights_file)
 
     # load config
